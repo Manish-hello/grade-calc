@@ -106,6 +106,10 @@
 			.mmm{
 				font-size: 40px;
 			}
+			/*.Add{
+				color: blue;
+				cursor: pointer;
+			}*/
 		</style>
 </head>
 <body>
@@ -128,6 +132,9 @@
 			<input type="text" name="" value="Subject 4" class="s4">
 			<input type="text" name="" value="Subject 5" class="s5">
 			<input type="text" name="" value="Subject 6" class="s6">
+			<input type="text" name="" value="Subject 7" class="s7">
+
+			<!-- <p class="Add" onclick="add()">Add more+</p> -->
 		</div>
 		<div class="credit">
 			<h4>Credit Hour</h4>
@@ -137,6 +144,8 @@
 			<input type="number" name="" class="c4">
 			<input type="number" name="" class="c5">
 			<input type="number" name="" class="c6">
+			<input type="number" name="" class="c7">
+
 			
 		</div>
 		<div class="grades">
@@ -147,6 +156,8 @@
 			<input type="text" name="" class="G4">
 			<input type="text" name="" class="G5">
 			<input type="text" name="" class="G6">
+			<input type="text" name="" class="G7">
+
 		</div>
 	</div>
 	<div class="btns">
@@ -160,24 +171,31 @@
 			'B+':3.5,
 			'B':3.0,
 			'C':2.50,
-			'D':1.75
+			'D':1.75,
+			'0':0
 		};
 		function calculate(){
 			document.querySelector(".hidden").style.visibility="visible";
 
 			const credit=[];
 			const grades=[];
-			for(var i=1;i<=6;i++){
-				credit[i]=parseInt(document.querySelector(".c"+i).value);
-				grades[i]=document.querySelector(".G"+i).value.toUpperCase();
+			for(var i=1;i<=7;i++){
+				if(document.querySelector(".c"+i).value==='' || document.querySelector(".G"+i)===''){
+					credit[i]=0;
+					grades[i]=0;
+				}
+				else{
+					credit[i]=parseInt(document.querySelector(".c"+i).value);
+					grades[i]=document.querySelector(".G"+i).value.toUpperCase();
+				}
 			}
 			var sumUpper=0;
 			var sumLower=0;
-			for(var i=1;i<=6;i++){
+			for(var i=1;i<=7;i++){
 				sumUpper+=(credit[i]*grade[grades[i]]);
 				sumLower+=credit[i];
 			}
-			var SGPA=(sumUpper/sumLower);	
+			var SGPA=(sumUpper/sumLower).toFixed(2);	
 			document.querySelector(".mmm").innerHTML=SGPA;		
 		}
 		function closee(){
